@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node* next;
+};
+
+node* front = NULL;
+node* rear = NULL;
+
+
+void Enque_push(int data)
+{
+    node* newnode = new node;
+    newnode->data = data;
+    newnode->next = NULL;
+
+
+    if (front == NULL)
+    {
+        front = newnode;
+        rear = newnode;
+    }
+
+    else
+    {
+        rear->next = newnode;//добавляем новый элемент в  конец очереди,хвост,закономерно,указывает на этот новый элемент
+        rear = newnode;//сдвигаем указатель  с хвоста очереди на новый элемент,теперь это хвост 
+    }
+}
+
+
+
+void Deque_pop()
+{
+    struct node* temp;
+
+    if (front == NULL)
+    {
+        printf("\nQueue is Empty \n");
+        return;
+    }
+
+    else
+    {
+        temp = front;
+        front = front->next;
+        if (front == NULL) {
+            rear = NULL;
+        }
+        free(temp);
+    }
+}
+
+
+void display()
+{
+    node* temp = front;
+    if (front == NULL)
+    {
+        printf("\nQueue is Empty \n");
+    }
+
+    else
+    {
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+    }
+    cout << endl;
+}
